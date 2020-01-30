@@ -2,10 +2,11 @@
 **Version 0.0.1**
 
 ## Introduction & Features
-* This a GUI based [PyQt5](https://pypi.org/project/PyQt5/) Desktop wallpaper changer, which use [PRAW's](https://github.com/praw-dev/praw) API to get images from subreddits and download them using [requests](https://github.com/psf/requests).
-* To add extra functionalities like [Windows 10 Toast Notifications](https://github.com/jithurjacob/Windows-10-Toast-Notifications) was used which provided background information to the user. 
+* This is a GUI implemented Desktop wallpaper changer using [PyQt5](https://pypi.org/project/PyQt5/), which includes [PRAW's](https://github.com/praw-dev/praw) API to get images from subreddits and download them using [requests](https://github.com/psf/requests).
+* Extra functionalities like [Windows 10 Toast Notifications](https://github.com/jithurjacob/Windows-10-Toast-Notifications) was used which provides background process information to the user. 
 * To add global hotkey support [keyboard](https://github.com/boppreh/keyboard) was used.
 ![createapp](/screenshots/ui.png)
+* Move to System tray and execute commands from there.
 
 ## How to use
 
