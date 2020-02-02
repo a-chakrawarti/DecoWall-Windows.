@@ -1,4 +1,4 @@
-# DecoWall-for-Windows
+# DecoWall-Windows
 **Version 0.0.1**
 
 ## Introduction & Features
@@ -27,10 +27,10 @@ Clone the repository ```git clone https://github.com/a-chakrawarti/DecoWall-for-
 * Run the ```python main.py```
 
 ## Configuration
-* To download images using Reddit's API you have to get your ```client_id``` and ```secret_id``` from https://www.reddit.com/prefs/apps.
+* To download images using Reddit's API you have to get your ```client_id``` and ```client_secret``` from https://www.reddit.com/prefs/apps.
 ![createapp](/screenshots/reddit_1.png)
 
-* Once you get your ```client_id``` and ```secret_id``` as shown in the screenshot, copy and paste their respective values in ```config.json``` file against each key.![createapp](/screenshots/reddit_2.png)
+* Once you get your ```client_id``` and ```client_secret``` as shown in the screenshot, copy and paste their respective values in ```config.json``` file against each key.![createapp](/screenshots/reddit_2.png)
 ```sh
 {
   "config": {
