@@ -1,5 +1,8 @@
 # DecoWall-Windows
-**Version 0.0.1**
+**Version 0.0.2**
+
+## Changelog v 0.0.2
+* Added dark mode
 
 ## Introduction & Features
 * This is a GUI implemented Desktop wallpaper changer using [PyQt5](https://pypi.org/project/PyQt5/), which includes [PRAW's](https://github.com/praw-dev/praw) API to get images from subreddits and download them using [requests](https://github.com/psf/requests).
