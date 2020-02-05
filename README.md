@@ -1,7 +1,7 @@
 # DecoWall-Windows
 **Version 0.0.2**
 
-## Changelog v 0.0.2
+## Changelog v0.0.2
 * Added dark mode
 
 ## Introduction & Features
