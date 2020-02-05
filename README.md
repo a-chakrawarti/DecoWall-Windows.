@@ -1,10 +1,12 @@
-# DecoWall-for-Windows
+# DecoWall-Windows
 **Version 0.0.1**
 
 ## Introduction & Features
-* This a GUI based [PyQt5](https://pypi.org/project/PyQt5/) Desktop wallpaper changer, which use [PRAW's](https://github.com/praw-dev/praw) API to get images from subreddits and download them using [requests](https://github.com/psf/requests).
-* To add extra functionalities like [Windows 10 Toast Notifications](https://github.com/jithurjacob/Windows-10-Toast-Notifications) was used which provided background information to the user. 
+* This is a GUI implemented Desktop wallpaper changer using [PyQt5](https://pypi.org/project/PyQt5/), which includes [PRAW's](https://github.com/praw-dev/praw) API to get images from subreddits and download them using [requests](https://github.com/psf/requests).
+* Extra functionalities like [Windows 10 Toast Notifications](https://github.com/jithurjacob/Windows-10-Toast-Notifications) was used which provides background process information to the user. 
 * To add global hotkey support [keyboard](https://github.com/boppreh/keyboard) was used.
+![createapp](/screenshots/ui.png)
+* Move to System tray and execute commands from there.
 
 ## How to use
 
@@ -25,8 +27,10 @@ Clone the repository ```git clone https://github.com/a-chakrawarti/DecoWall-for-
 * Run the ```python main.py```
 
 ## Configuration
-* To download images using Reddit's API you have to get your ```client_id``` and ```secret_id``` from https://www.reddit.com/prefs/apps.
-* Once you get your ```client_id``` and ```secret_id``` as shown in the screenshot, copy and paste their respective values in ```config.json``` file against each key.
+* To download images using Reddit's API you have to get your ```client_id``` and ```client_secret``` from https://www.reddit.com/prefs/apps.
+![createapp](/screenshots/reddit_1.png)
+
+* Once you get your ```client_id``` and ```client_secret``` as shown in the screenshot, copy and paste their respective values in ```config.json``` file against each key.![createapp](/screenshots/reddit_2.png)
 ```sh
 {
   "config": {
