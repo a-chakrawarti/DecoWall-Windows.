@@ -71,13 +71,13 @@ def get_config(key):
     """ returns value from settings.json having key """
     with open('config.json', 'r') as file:
         data = load(file)
-        return data['config'][f'{key}']
+        return data[f'{key}']
 
 
 def apply_config(key, value):
     """updates settings.json provide key and value"""
     with open('config.json', 'r') as file:
         data = load(file)
-        data['config'][f'{key}'] = value
+        data[f'{key}'] = value
     with open('config.json', 'w') as file:
         dump(data, file, indent=2)

@@ -201,33 +201,6 @@ class MainWindow(QMainWindow):
                                                        ctypes.c_wchar_p(wallpaper_path),
                                                        3)
 
-    '''----------------------------------- SYSTEM TRAY FUNCTION CALLS ---------------------------------------------'''
-
-    def next_action_fn(self):
-        self.next_image()
-        self.set_as_wallpaper()
-
-    def shuffle_action_fn(self):
-        self.shuffle_images()
-        self.shuffle_cbox.setChecked(True)
-        apply_config('shuffle-images', True)
-
-    def previous_action_fn(self):
-        self.previous_image()
-        self.set_as_wallpaper()
-
-    def favourite_action_fn(self):
-        self.add_to_favs()
-
-    def download_action_fn(self):
-        self.download_thread()
-
-    @staticmethod
-    def open_action_fn():
-        window.showNormal()
-
-    '''---------------------------------  END OF SYSTEM TRAY FUNCTION CALLS ------------------------------------'''
-
     def addsub_to_list(self):
         if is_connected():
             if len(get_config('sub-list')) <= 5:
@@ -295,6 +268,37 @@ class MainWindow(QMainWindow):
                 self.comboBox_apply_btn.show()
             except AttributeError:
                 pass
+
+    # def fullscreen(self):
+    #         self.fullscreen_label.setPixmap(QPixmap(self.image_list[0]).scaled(1920, 1080, Qt.KeepAspectRatio, Qt.FastTransformation))
+    #         self.fullscreen_window.showFullScreen()
+
+    '''----------------------------------- SYSTEM TRAY FUNCTION CALLS ---------------------------------------------'''
+
+    def next_action_fn(self):
+        self.next_image()
+        self.set_as_wallpaper()
+
+    def shuffle_action_fn(self):
+        self.shuffle_images()
+        self.shuffle_cbox.setChecked(True)
+        apply_config('shuffle-images', True)
+
+    def previous_action_fn(self):
+        self.previous_image()
+        self.set_as_wallpaper()
+
+    def favourite_action_fn(self):
+        self.add_to_favs()
+
+    def download_action_fn(self):
+        self.download_thread()
+
+    @staticmethod
+    def open_action_fn():
+        window.showNormal()
+
+    '''---------------------------------  END OF SYSTEM TRAY FUNCTION CALLS ------------------------------------'''
 
 
 if __name__ == '__main__':

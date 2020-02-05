@@ -1,16 +1,14 @@
 {
-  "config": {
-    "client_id": "cilent-id",
-    "client_secret": "client-secret",
-    "change-every": 2,
-    "shuffle-images": true,
-    "time-format": "minutes",
-    "startup": false,
-    "activate-system-tray": true,
-    "download-limit": 60,
-    "auto-change": false,
-    "sub-list": [
-      "wallpapers"
-    ]
-  }
+  "client_id": "cilent-id",
+  "client_secret": "client-secret",
+  "change-every": 10,
+  "shuffle-images": true,
+  "time-format": "minutes",
+  "startup": true,
+  "activate-system-tray": true,
+  "download-limit": 60,
+  "auto-change": false,
+  "sub-list": [
+    "wallpapers"
+  ]
 }
