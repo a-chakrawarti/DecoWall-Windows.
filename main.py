@@ -26,6 +26,7 @@ class MainWindow(QMainWindow):
         initUI(self)
         make_directory()
         self.deque()
+        self.time_list = deque(['minutes', 'hours', 'day(s)'])
 
         keyboard.add_hotkey('ctrl+right', self.next_action_fn)
         keyboard.add_hotkey('ctrl+left', self.previous_action_fn)
@@ -133,17 +134,20 @@ class MainWindow(QMainWindow):
 
         if cbox.text() == "Activate System Tray":
             if cbox.isChecked() == 1:
+                notify("System Tray Activated", " ")
                 apply_config('activate-system-tray', True)
             else:
+                notify("System Tray Deactivated", " ")
                 apply_config('activate-system-tray', False)
 
         if cbox.text() == "Auto-Changer":
             if cbox.isChecked() == 1:
-                apply_config('auto-change', True)
                 notify("Auto Changer Enabled", " ")
+                apply_config('auto-change', True)
             else:
+                notify("Auto Changer Disabled", " ")
                 apply_config('auto-change', False)
-                self.start_auto_changer()
+                self.stop_auto_changer()
 
         if cbox.text() == "Run at Startup":
             if cbox.isChecked() == 1:
@@ -159,7 +163,7 @@ class MainWindow(QMainWindow):
                 apply_config('shuffle-images', False)
                 self.shuffle_images()
 
-    def combobox_apply(self):
+    def change_every_activate(self):
         if get_config('auto-change'):
             try:
                 value = int(self.change_every_value.text())
@@ -171,10 +175,12 @@ class MainWindow(QMainWindow):
                 self.change_every_value.clear()
             else:
                 apply_config('change-every', value)
-                apply_config('time-format', self.change_every_combobox.currentText())
+                apply_config('time-format', self.change_every_btn.text())
 
             self.start_auto_changer()
-            self.comboBox_apply_btn.hide()
+            self.activate_change_every_btn.hide()
+        else:
+            notify("Auto Changer not Enabled", " ")
 
     def display_image_label(self, image_file):
         if self.image_list:
@@ -188,6 +194,11 @@ class MainWindow(QMainWindow):
                 image_file = changed_image_file
                 scaled_image = QPixmap(image_file).scaled(600, 338, Qt.KeepAspectRatio, Qt.FastTransformation)
                 self.image_label.setPixmap(scaled_image)
+
+    def time_btn(self):
+        self.time_list.rotate(1)
+        text_update = self.time_list[0]
+        self.change_every_btn.setText(text_update)
 
     def set_as_wallpaper(self):
         if self.image_list:
@@ -234,6 +245,7 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event):
         if self.systray_cbox.isChecked() == 1:
             event.ignore()
+            notify("System Tray Enabled", " ")
             self.tray_icon.show()
             self.hide()
         else:
@@ -248,9 +260,9 @@ class MainWindow(QMainWindow):
             self.show()
 
     def start_auto_changer(self):
-        if get_config('auto-change'):
-            numeric_value = get_config('change-every')
-            time_format = get_config('time-format')
+        if get_config('auto-change'):  # bool
+            numeric_value = get_config('change-every')  # gets the value
+            time_format = get_config('time-format')  # gets the time-format min/hours/days
             if time_format == 'minutes':
                 time = numeric_value*60
             elif time_format == 'hours':
@@ -261,17 +273,13 @@ class MainWindow(QMainWindow):
             self.initiate_background.start()
             notify("Auto Changer Activated",
                    f"Time has been set to {get_config('change-every')} {get_config('time-format')}")
-        else:
-            try:
-                self.initiate_background.stop()
-                notify("Auto Changer Disabled", " ")
-                self.comboBox_apply_btn.show()
-            except AttributeError:
-                pass
 
-    # def fullscreen(self):
-    #         self.fullscreen_label.setPixmap(QPixmap(self.image_list[0]).scaled(1920, 1080, Qt.KeepAspectRatio, Qt.FastTransformation))
-    #         self.fullscreen_window.showFullScreen()
+    def stop_auto_changer(self):
+        try:
+            self.initiate_background.stop()
+            self.activate_change_every_btn.show()
+        except AttributeError:
+            pass
 
     '''----------------------------------- SYSTEM TRAY FUNCTION CALLS ---------------------------------------------'''
 

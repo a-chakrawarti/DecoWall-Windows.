@@ -2,7 +2,7 @@
 # 3rd Party Libraries
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtWidgets import (QApplication, QLineEdit, QLabel, QPushButton, QCheckBox, QShortcut,
-                             QFrame, QWidget, QComboBox, QListWidget, QMenu, QSystemTrayIcon)
+                             QFrame, QWidget, QListWidget, QMenu, QSystemTrayIcon)
 from PyQt5.QtGui import QKeySequence, QFont
 
 # Custom Libraries
@@ -16,8 +16,6 @@ def initUI(self):
     self.setGeometry(self.width / 2 - 300, self.height / 2 - 300, 600, 600)
     self.setFixedSize(600, 600)
     window = QWidget()
-    # self.fullscreen_window = QWidget()
-    # self.fullscreen_label = QLabel(self.fullscreen_window)
     self.setCentralWidget(window)
 
     with open('stylesheet.qss', 'r') as file:
@@ -29,12 +27,6 @@ def initUI(self):
     self.image_label.setGeometry(QRect(0, 0, 600, 339))
     self.image_label.setAlignment(Qt.AlignCenter)
     self.image_label.setObjectName('viewingArea')
-
-    # self.fullscreen_btn = QPushButton(self.image_label)
-    # self.fullscreen_btn.setGeometry(QRect(570, 310, 24, 24))
-    # self.fullscreen_btn.setObjectName('fullScreen')
-    # self.fullscreen_btn.setIcon(QIcon('expand.png'))
-    # self.fullscreen_btn.clicked.connect(self.fullscreen)
 
     self.previous_image_btn = QPushButton(window)
     self.previous_image_btn.setGeometry(QRect(10, 360, 91, 30))
@@ -98,16 +90,14 @@ def initUI(self):
     self.change_every_value.setAlignment(Qt.AlignCenter)
     self.change_every_value.setObjectName('changeValue')
 
-    combo_list = ['minutes', 'hours', 'days']
-    self.change_every_combobox = QComboBox(window)
-    self.change_every_combobox.setGeometry(QRect(457, 420, 63, 30))
-    self.change_every_combobox.setEditable(False)
-    self.change_every_combobox.setMaxVisibleItems(3)
-    self.change_every_combobox.addItems(combo_list)
+    self.change_every_btn = QPushButton(get_config('time-format'), window)
+    self.change_every_btn.setObjectName('timeBtn')
+    self.change_every_btn.setGeometry(QRect(457, 420, 59, 30))
+    self.change_every_btn.clicked.connect(self.time_btn)
 
-    self.comboBox_apply_btn = QPushButton("Apply", window)
-    self.comboBox_apply_btn.setGeometry(529, 420, 61, 30)
-    self.comboBox_apply_btn.clicked.connect(self.combobox_apply)
+    self.activate_change_every_btn = QPushButton("Activate", window)
+    self.activate_change_every_btn.setGeometry(529, 420, 61, 30)
+    self.activate_change_every_btn.clicked.connect(self.change_every_activate)
 
     self.directory_label = QLabel(window)
     self.directory_label.setGeometry(QRect(330, 516, 70, 13))
