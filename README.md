@@ -32,8 +32,11 @@
 * concurrent.futures
 
 ## UI/UX
+
+
 ![createapp](/screenshots/ui.png)
-* Move to System tray and execute commands from there.
+
+
 
 ## How to use
 
@@ -45,9 +48,9 @@ Clone the repository ```git clone https://github.com/a-chakrawarti/DecoWall-Wind
 
 * If you have python>=3.6 installed, do ```python -m venv <your_env>```, this will create a virtual environment of python having the same version as your installed one with pip and setuptools package.
 
-* [Optional] To make copy of all the packages of system-site python directory ```python -m venv [virtualenv] system-site-packages```.
+* Optional: To make copy of all the packages of system-site python directory ```python -m venv <your_env> system-site-packages```.
 
-* After this activate the virtual environment, ```<your_env>\Scripts\activate.bat```. Similarly, you can deactivate using ```[your_env]\Scripts\deactivate.bat``` or simply ```deactivate```.
+* After this activate the virtual environment, ```<your_env>\Scripts\activate.bat```. Similarly, you can deactivate using ```<your_env>\Scripts\deactivate.bat``` or simply ```deactivate```.
 
 * Moving forward, now to install all the dependencies for the project ```pip install -r requirements.txt```.
 
@@ -55,9 +58,16 @@ Clone the repository ```git clone https://github.com/a-chakrawarti/DecoWall-Wind
 
 ## Configuration
 * To download images using Reddit's API you have to get your ```client_id``` and ```client_secret``` from https://www.reddit.com/prefs/apps.
+
+
 ![createapp](/screenshots/reddit_1.png)
 
-* Once you get your ```client_id``` and ```client_secret``` as shown in the screenshot, copy and paste their respective values in ```config.json``` file against each key.![createapp](/screenshots/reddit_2.png)
+* Once you get your ```client_id``` and ```client_secret``` as shown in the screenshot, copy and paste their respective values in ```config.json``` file against each key.
+
+
+![createapp](/screenshots/reddit_2.png)
+
+
 ```sh
 {
     "client_id": "pVJNRLN7ra20Kg",
