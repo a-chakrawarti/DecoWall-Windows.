@@ -6,19 +6,19 @@ from PyQt5.QtWidgets import (QApplication, QLineEdit, QLabel, QPushButton, QChec
 from PyQt5.QtGui import QKeySequence, QFont
 
 # Custom Libraries
-from staticmethods import *
+from src.staticmethods import *
 
 
 def initUI(self):
     app = QApplication([])
     self.setWindowTitle('DecoWall Windows')
-    self.setWindowIcon(QIcon('favicon.png'))
+    self.setWindowIcon(QIcon('assets/wall.png'))
     self.setGeometry(self.width / 2 - 300, self.height / 2 - 300, 600, 600)
     self.setFixedSize(600, 600)
     window = QWidget()
     self.setCentralWidget(window)
 
-    with open('stylesheet.qss', 'r') as file:
+    with open('src/stylesheet.qss', 'r') as file:
         self.setStyleSheet(file.read())
 
     '''---------------------------------------------------------------------------------'''
@@ -27,6 +27,12 @@ def initUI(self):
     self.image_label.setGeometry(QRect(0, 0, 600, 339))
     self.image_label.setAlignment(Qt.AlignCenter)
     self.image_label.setObjectName('viewingArea')
+
+    # self.fullscreen_btn = QPushButton(self.image_label)
+    # self.fullscreen_btn.setGeometry(QRect(570, 310, 24, 24))
+    # self.fullscreen_btn.setObjectName('fullScreen')
+    # self.fullscreen_btn.setIcon(QIcon('expand.png'))
+    # self.fullscreen_btn.clicked.connect(self.fullscreen)
 
     self.previous_image_btn = QPushButton(window)
     self.previous_image_btn.setGeometry(QRect(10, 360, 91, 30))
@@ -176,7 +182,7 @@ def initUI(self):
 
     '''------------------------- SYSTEM TRAY UI ELEMENTS ----------------------------------------------'''
 
-    self.tray_icon = QSystemTrayIcon(QIcon('favicon.png'))
+    self.tray_icon = QSystemTrayIcon(QIcon('assets/wall.png'))
     self.tray_icon.setToolTip('Open DecoWall')
     self.tray_icon.hide()
 

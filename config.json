@@ -1,13 +1,13 @@
 {
   "client_id": "cilent-id",
   "client_secret": "client-secret",
-  "change-every": 10,
+  "change-every": 1,
   "shuffle-images": true,
-  "time-format": "minutes",
-  "startup": true,
+  "time-format": "day(s)",
+  "startup": false,
   "activate-system-tray": true,
   "download-limit": 60,
-  "auto-change": false,
+  "auto-change": true,
   "sub-list": [
     "wallpapers"
   ]

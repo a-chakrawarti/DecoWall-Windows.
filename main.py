@@ -3,6 +3,7 @@ from collections import deque
 import shutil
 import random
 import threading
+import logging
 
 # 3rd Party Libraries
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon
@@ -10,10 +11,16 @@ from PyQt5.QtCore import Qt
 import keyboard
 
 # Custom Libraries
-from ui import initUI
-from staticmethods import *  # is_connected, notify, make_directory, image_name, popup, apply_config, monitor_resolution
-from reddit_connect import *  # sub_exists, image_download_execute
-from repeated_timer import RepeatedTimer
+from src.ui import initUI
+from src.staticmethods import *  # is_connected, notify, make_directory, image_name, popup, apply_config, monitor_resolution
+from src.reddit_connect import *  # sub_exists, image_download_execute
+from src.repeated_timer import RepeatedTimer
+# from secondary import ImageWindow
+
+with open('log.txt', 'wt') as log:
+    log.write("")
+logging.basicConfig(filename='log.txt', level=logging.INFO,
+                    format='%(levelname)s: %(asctime)s -> %(message)s')
 
 
 class MainWindow(QMainWindow):
@@ -22,6 +29,7 @@ class MainWindow(QMainWindow):
     image_list = []
 
     def __init__(self):
+        logging.info("Application Started")
         QMainWindow.__init__(self)
         initUI(self)
         make_directory()
@@ -32,12 +40,15 @@ class MainWindow(QMainWindow):
         keyboard.add_hotkey('ctrl+left', self.previous_action_fn)
         keyboard.add_hotkey('ctrl+up', self.favourite_action_fn)
         keyboard.add_hotkey('ctrl+down', self.download_thread)
+        keyboard.add_hotkey('ctrl+shift+s', self.shuffle_action_fn)
 
         try:
             self.set_image = self.image_list[0]
             self.display_image_label(self.image_list[0])
         except IndexError:
             self.set_blank()
+
+        # self.image_window = ImageWindow()
 
     def set_blank(self):
 
@@ -88,18 +99,21 @@ class MainWindow(QMainWindow):
             self.set_image = self.image_list[0]
 
     def download_images(self):
-        total_image = self.listWidget.count()
-        notify(f'Download started \u0085{total_image*5} images will be downloaded', " ")
-        before = dict([(f, None) for f in os.listdir('downloaded')])
-        image_download_execute(get_config('sub-list'))  # runs the threaded module in reddit_connect.py
-        after = dict([(f, None) for f in os.listdir('downloaded')])
-        added = [f for f in after if f not in before]
-        notify(f'Download Successful : {len(added)} added to downloaded', " ")
-        to_extend = []
-        for file in added:
-            to_extend.append(os.path.join('downloaded', file))
-        # print(to_extend)
-        self.image_list.extend(to_extend)
+        if is_connected():
+            total_image = self.listWidget.count()
+            notify(f'Download started \u0085{total_image*5} images will be downloaded', " ")
+            before = dict([(f, None) for f in os.listdir('downloaded')])
+            image_download_execute(get_config('sub-list'))  # runs the threaded module in reddit_connect.py
+            after = dict([(f, None) for f in os.listdir('downloaded')])
+            added = [f for f in after if f not in before]
+            notify(f'Download Successful : {len(added)} added to downloaded', " ")
+            to_extend = []
+            for file in added:
+                to_extend.append(os.path.join('downloaded', file))
+            # print(to_extend)
+            self.image_list.extend(to_extend)
+        else:
+            notify("Not connected to the Internet", " ")
 
     def download_thread(self):
         threading.Thread(target=self.download_images).start()
@@ -184,7 +198,7 @@ class MainWindow(QMainWindow):
 
     def display_image_label(self, image_file):
         if self.image_list:
-            scaled_image = QPixmap(image_file).scaled(600, 338, Qt.KeepAspectRatio, Qt.FastTransformation)
+            scaled_image = QPixmap(image_file).scaled(600, 338, Qt.IgnoreAspectRatio, Qt.FastTransformation)
             if not scaled_image.isNull():
                 self.image_label.setPixmap(scaled_image)
             else:
@@ -192,7 +206,7 @@ class MainWindow(QMainWindow):
                 os.rename(image_file, changed_image_file)
                 self.image_list[0] = changed_image_file
                 image_file = changed_image_file
-                scaled_image = QPixmap(image_file).scaled(600, 338, Qt.KeepAspectRatio, Qt.FastTransformation)
+                scaled_image = QPixmap(image_file).scaled(600, 338, Qt.IgnoreAspectRatio, Qt.FastTransformation)
                 self.image_label.setPixmap(scaled_image)
 
     def time_btn(self):
@@ -248,8 +262,10 @@ class MainWindow(QMainWindow):
             notify("System Tray Enabled", " ")
             self.tray_icon.show()
             self.hide()
+            logging.info('Moved to System tray')
         else:
             try:
+                logging.info('Application Closed')
                 self.initiate_background.stop()
                 notify("Auto Changer Disabled", " ")
             except AttributeError:
@@ -258,6 +274,7 @@ class MainWindow(QMainWindow):
     def tray_icon_doubleclick(self, event):
         if event == QSystemTrayIcon.DoubleClick:
             self.show()
+            logging.info('Application restored')
 
     def start_auto_changer(self):
         if get_config('auto-change'):  # bool
@@ -280,6 +297,11 @@ class MainWindow(QMainWindow):
             self.activate_change_every_btn.show()
         except AttributeError:
             pass
+
+    #
+    # def fullscreen(self):
+    #     self.image_window.showFullScreen()
+    #     self.hide()
 
     '''----------------------------------- SYSTEM TRAY FUNCTION CALLS ---------------------------------------------'''
 
@@ -304,6 +326,7 @@ class MainWindow(QMainWindow):
 
     @staticmethod
     def open_action_fn():
+        logging.info('Application restored')
         window.showNormal()
 
     '''---------------------------------  END OF SYSTEM TRAY FUNCTION CALLS ------------------------------------'''

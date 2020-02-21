@@ -10,7 +10,7 @@ from prawcore import NotFound, exceptions
 import requests
 
 # Custom Libraries
-from staticmethods import get_config
+from src.staticmethods import get_config
 
 # Global Variables
 image_title = []

@@ -23,7 +23,7 @@ def notify(title, msg):
     toaster = ToastNotifier()
     toaster.show_toast(title,
                        msg,
-                       icon_path='./favicon.ico',
+                       icon_path='assets/notify.ico',
                        duration=2,
                        threaded=True
                        )

@@ -31,6 +31,16 @@
     background-color: #2a2a2e;
 }
 
+.QPushButton#fullScreen {
+    border: 0px;
+    background-color: rgba(89, 89, 89, 0.3);
+}
+
+.QPushButton#fullScreen:hover {
+    border: 1px;
+    background-color: rgba(89, 89, 89, 0.7);
+}
+
 .QPushButton:hover {
     border: 2.3px solid blue;
     }
