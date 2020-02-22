@@ -89,8 +89,6 @@ Clone the repository ```git clone https://github.com/a-chakrawarti/DecoWall-Wind
 * Up : add to favourites directory
 * Down : set current image as Wallpaper
 
-
-
 -- Modifiers [Global Support/Background]
 * Ctrl+Left/Ctrl+Right : set previous/next image as wallpaper
 * Ctrl+Down : download images
@@ -99,7 +97,6 @@ Clone the repository ```git clone https://github.com/a-chakrawarti/DecoWall-Wind
 
 ## Note
 * To enable system tray, click on "Activate System Tray" option and close the application.
-
 
 ## License
 Licensed under [GNU General Public License v3.0](LICENSE)
