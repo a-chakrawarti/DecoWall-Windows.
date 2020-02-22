@@ -1,7 +1,12 @@
 .QLabel {
-    font-size: 11.7 px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 500;
     color: grey;
+    }
+
+.QLabel#fileInfo {
+    font-size: 13px;
+    font-weight: 400;
     }
 
 .QPushButton {
@@ -31,14 +36,16 @@
     background-color: #2a2a2e;
 }
 
-.QPushButton#fullScreen {
-    border: 0px;
-    background-color: rgba(89, 89, 89, 0.3);
+.QPushButton#navigate {
+    border: 1px;
+    border-radius: 10px;
+    background-color: rgba(89, 89, 89, 0.1);
 }
 
-.QPushButton#fullScreen:hover {
+.QPushButton#navigate:hover {
     border: 1px;
-    background-color: rgba(89, 89, 89, 0.7);
+    border-radius: 10px;
+    background-color: rgba(89, 89, 89, 0.5);
 }
 
 .QPushButton:hover {

@@ -4,11 +4,13 @@ import shutil
 import random
 import threading
 import logging
+from os import stat
 
 # 3rd Party Libraries
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon
 from PyQt5.QtCore import Qt
 import keyboard
+from PIL import Image
 
 # Custom Libraries
 from src.ui import initUI
@@ -48,10 +50,28 @@ class MainWindow(QMainWindow):
         except IndexError:
             self.set_blank()
 
-        # self.image_window = ImageWindow()
+    def get_file_info(self):
+        current_img = self.image_list[0]
+        file_info = 3*[None]
+        file_info[0] = current_img.split('\\')[1]
+        img = Image.open(current_img)
+        # file_info[1] = float("%.2f" % (stat(current_img).st_size / 1024))
+        file_size = float("%.2f" % (stat(current_img).st_size / 1024))
+        if file_size > 1024.0:
+            file_size = float(file_size/1024)
+            file_info[1] = str("%.2f" % file_size)+' MiB'
+        else:
+            file_info[1] = str("%.2f" % file_size)+' KiB'
+        file_info[2] = f'{img.size[0]}x{img.size[1]}'
+        return file_info
+
+    def set_file_info(self):
+        info = self.get_file_info()
+        self.filename_info.setText(f"<b>Name</b>: {info[0]}<br>"
+                                   f"<b>Size</b>: {info[1]}<br>"
+                                   f"<b>Dimension</b>: {info[2]}")
 
     def set_blank(self):
-
         text = 'Directory Empty' \
                '<hr><p><span style="font-size: 18px; margin-top= 50px">Download images by clicking "Download"<br>OR<br>Add images manually</span></p>' \
                '<hr><p><span style="font-size: 13px">* You can manually add images in "downloaded" or "favourites" folder*</span></p>'
@@ -198,6 +218,7 @@ class MainWindow(QMainWindow):
 
     def display_image_label(self, image_file):
         if self.image_list:
+            self.set_file_info()
             scaled_image = QPixmap(image_file).scaled(600, 338, Qt.IgnoreAspectRatio, Qt.FastTransformation)
             if not scaled_image.isNull():
                 self.image_label.setPixmap(scaled_image)

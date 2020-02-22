@@ -1,8 +1,12 @@
 # DecoWall Windows
-**Version 0.2**
+**Version 0.2.1**
 
-## Changelog v 0.2
+## Changelog v0.2.1
 * Added default dark mode
+* Added image information
+
+## Pre-release 
+You can download the build from [https://github.com/a-chakrawarti/DecoWall-Windows/releases](https://github.com/a-chakrawarti/DecoWall-Windows/releases).
 
 ## Introduction & Features
 * This is a GUI based Desktop wallpaper changer.
@@ -12,13 +16,14 @@
 * Add wallpapers to "Favourites" for quick access.
 
 ## Third Party Libraries: 
-* [PyQt5](https://pypi.org/project/PyQt5/) for GUI
-* [PRAW's](https://github.com/praw-dev/praw) to make reddit API calls and get image(title, url) from subreddits
-* [requests](https://github.com/psf/requests) to download images
+* [PyQt5](https://pypi.org/project/PyQt5/)
+* [PRAW's](https://github.com/praw-dev/praw)
+* [requests](https://github.com/psf/requests)
 * [Windows 10 Toast Notifications](https://github.com/jithurjacob/Windows-10-Toast-Notifications)
-* [keyboard](https://github.com/boppreh/keyboard) global hotkey support
+* [keyboard](https://github.com/boppreh/keyboard)
+* [PIL](https://github.com/python-pillow/Pillow)
 
-# In-built Libraries:
+## In-built Libraries:
 * collections
 * json
 * os
@@ -30,6 +35,7 @@
 * ctypes
 * sys
 * concurrent.futures
+
 
 ## UI/UX
 
@@ -75,6 +81,25 @@ Clone the repository ```git clone https://github.com/a-chakrawarti/DecoWall-Wind
     ...
 }
 ```
+
+
+## Shortcut Keys
+-- Arrow keys [Only foreground]
+* Left/Right : navigate images in the directories
+* Up : add to favourites directory
+* Down : set current image as Wallpaper
+
+
+
+-- Modifiers [Global Support/Background]
+* Ctrl+Left/Ctrl+Right : set previous/next image as wallpaper
+* Ctrl+Down : download images
+* Ctrl+Up : add to favourites
+* Ctrl+Shift+S : shuffle images
+
+## Note
+* To enable system tray, click on "Activate System Tray" option and close the application.
+
 
 ## License
 Licensed under [GNU General Public License v3.0](LICENSE)
