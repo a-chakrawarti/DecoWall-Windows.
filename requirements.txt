@@ -18,6 +18,6 @@ pywin32==227
 requests==2.22.0
 six==1.12.0
 update-checker==0.16
-urllib3==1.25.6
+urllib3==1.25.8
 websocket-client==0.56.0
 win10toast==0.9
