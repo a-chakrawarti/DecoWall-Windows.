@@ -4,7 +4,7 @@ Click==7.0
 docutils==0.15.2
 idna==2.8
 keyboard==0.13.4
-Pillow==6.2.1
+Pillow==8.2.0
 praw==6.4.0
 prawcore==1.0.1
 Pygments==2.4.2
