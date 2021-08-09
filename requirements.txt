@@ -14,7 +14,7 @@ PyQt5-sip==12.7.0
 pyqt5-tools==5.13.0.1.5
 PyQt5Designer==5.10.1
 python-dotenv==0.10.3
-pywin32==227
+pywin32==301
 requests==2.22.0
 six==1.12.0
 update-checker==0.16
